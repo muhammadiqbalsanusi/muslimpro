@@ -1,0 +1,179 @@
+### TESTING
+GET http://localhost:3000/
+Content-Type: application/json
+
+
+### Register
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "email": "user2@mail.com",
+  "password": "user123",
+}
+
+
+### Login
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "email": "user1@mail.com",
+  "password": "user1"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+### AddFavorite
+POST http://localhost:3000/favorite
+Content-Type: application/json
+# access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQxNDY0NDc2fQ.fM760RjfiwP9hHQu-JGQHwb7ZPotsTiVk9a8XCnyyiE
+
+{
+  
+  "CustomerId": "13",
+  "name": "pon-villa-8",
+  "facility": "Wifi",
+  "roomCapacity": "2",
+  "imgUrl": "https://ik.imagekit.io/psgze5ehxjm/design-photo-hotel-1_zvPWVUvHG.png",
+  "location": "jatim",
+  "price": "1500000",
+  "TypeId": "1"
+}
+
+
+# ACCOMODATION
+### Get Accomodations all
+GET http://localhost:3000/pub/accomodations
+Content-Type: application/json
+# access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzgyfQ.yGmRkHEozNAIjSklKX2MofEAcluMqds__i85iZaDdbc
+
+
+##testing
+GET http://localhost:3000
+Content-Type: application/json
+
+# USER
+### GET /users
+GET http://localhost:3000/users
+Content-Type: application/json
+
+### Register
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "username": "staff500",
+  "email": "rotibuaya@mail.com",
+  "password": "staff500",
+  "role" : "staff",
+  "phoneNumber": "111111",
+  "address": "bali"
+}
+### customerRegister
+POST https://deploy-air-bnb.herokuapp.com/customers/register
+Content-Type: application/json
+
+{
+  "username": "customer10",
+  "email": "customer10@mail.com",
+  "password": "customer10",
+  "phoneNumber": "111111111",
+  "address": "sumbawa-ntb"
+}
+### customerLogin
+POST https://deploy-air-bnb.herokuapp.com/customers/login
+Content-Type: application/json
+
+{
+  "email": "customer10@mail.com",
+  "password": "customer10",
+}
+
+### Login
+POST http://localhost:3000/customer/users/login
+Content-Type: application/json
+
+{
+  "email": "customer3@mail.com",
+  "password": "customer3"
+}
+### Update User
+PUT http://localhost:3000/users/25
+Content-Type: application/json
+# access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzEyfQ.Ip04Y8U86Hi40kcytBtZDCb0hXhQiry0dl-5O3URlSQ"
+
+{
+  "username": "staff7-edit",
+  "email": "staff7@mail.com",
+  "password": "staff7123",
+  "phoneNumber": "111111",
+  "address": "jatim"
+}
+### Delete User
+DELETE http://localhost:3000/users/83
+Content-Type: application/json
+access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzEyfQ.Ip04Y8U86Hi40kcytBtZDCb0hXhQiry0dl-5O3URlSQ"
+
+
+# ACCOMODATION
+### Get Accomodations all
+GET http://localhost:3000/accomodations
+Content-Type: application/json
+access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzgyfQ.yGmRkHEozNAIjSklKX2MofEAcluMqds__i85iZaDdbc
+
+### Get Accomodation findOne
+GET http://localhost:3000/accomodations/31
+Content-Type: application/json
+access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzEyfQ.Ip04Y8U86Hi40kcytBtZDCb0hXhQiry0dl-5O3URlSQ"
+
+### Post Accomodation
+POST http://localhost:3000/accomodations
+Content-Type: application/json
+access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzEyfQ.Ip04Y8U86Hi40kcytBtZDCb0hXhQiry0dl-5O3URlSQ"
+
+{
+  "name": "pon-villa-8",
+  "facility": "Wifi",
+  "roomCapacity": "2",
+  "imgUrl": "https://ik.imagekit.io/psgze5ehxjm/design-photo-hotel-1_zvPWVUvHG.png",
+  "location": "jatim",
+  "price": "1500000",
+  "TypeId": "1"
+}
+
+  #  "imgUrl": "https://pix10.agoda.net/hotelImages/124/1246280/1246280_16061017110043391702.jpg?s=1024x768",
+ 
+  #  "imgUrl": "https://images.trvl-media.com/hotels/18000000/17510000/17507900/17507816/962bd2ec.jpg?impolicy=fcrop&w=670&h=385&p=1&q=medium",
+ 
+
+
+### Update Accomodation
+PUT http://localhost:3000/accomodations/39
+Content-Type: application/json
+access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzEyfQ.Ip04Y8U86Hi40kcytBtZDCb0hXhQiry0dl-5O3URlSQ"
+
+{
+  "name": "vill-bali-update",
+  "facility": "Wifi",
+  "roomCapacity": "2",
+  "imgUrl": "https://i.imgur.com/kpmOs77.jpeg",
+  "location": "jatim",
+  "price": "1500000",
+  "TypeId": "2"
+}
+
+### Delete Accomodation
+DELETE http://localhost:3000/accomodations/69
+Content-Type: application/json
+access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJwaG9uZU51bWJlciI6IjIyMjIyMjIyIiwiYWRkcmVzcyI6ImJveW9sYWxpIiwiaWF0IjoxNjQwMDA0MzEyfQ.Ip04Y8U86Hi40kcytBtZDCb0hXhQiry0dl-5O3URlSQ"
+
