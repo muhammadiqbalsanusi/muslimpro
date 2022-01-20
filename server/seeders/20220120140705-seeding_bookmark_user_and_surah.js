@@ -1,7 +1,7 @@
 'use strict';
-const bcrypt = require('bcryptjs')
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -11,28 +11,37 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('Users', [{
+
+     await queryInterface.bulkInsert('Bookmarks', [{
       id: 1,
-      email: 'admin@mail.com',
-      password: bcrypt.hashSync('admin123', 10),
+      UserId : 1,
+      SurahId : 1,
+      nama : "Al Fatihah",
+      arti : "Pembukaan",
+      type : "mekah",
+      ayat : 7,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       id: 2,
-      email: 'iqbal@mail.com',
-      password: bcrypt.hashSync('iqbal123', 10),
+      UserId : 2,
+      SurahId : 1,
+      nama : "Al Fatihah",
+      arti : "Pembukaan",
+      type : "mekah",
+      ayat : 7,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Bookmarks', null, {});
   }
 };

@@ -9,7 +9,6 @@ module.exports = {
                 message: "missing access_token"
             })
 
-
             const decoded = jwt.verify(req.headers.access_token, process.env.JWT_SECRET)
 
             User.findByPk(decoded.id)
