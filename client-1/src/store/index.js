@@ -4,6 +4,7 @@ import axios from 'axios'
 import router from '../router'
 import Swal from 'sweetalert2'
 
+// https://muslim-pro.herokuapp.com/users/login
 
 Vue.use(Vuex)
 
@@ -47,7 +48,7 @@ export default new Vuex.Store({
   actions: {
     loginUser(context, payload) {
       axios({
-        url: 'http://localhost:3000/users/login',
+        url: 'https://muslim-pro.herokuapp.com/users/login',
         method: 'POST',
         data: {
           email: payload.email,
@@ -69,7 +70,7 @@ export default new Vuex.Store({
     handleRegister(context, payload) {
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/users/register',
+        url: 'https://muslim-pro.herokuapp.com/users/register',
         data: {
           username: payload.username,
           email: payload.email,
@@ -142,7 +143,7 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data.data.hadith, '<<<<<<<<<<<<')
+          // console.log(data.data.hadith, '<<<<<<<<<<<<')
           context.commit('ONE_HADITS', data.data.hadith)
           router.push('/detailhadits')
         })
@@ -168,7 +169,7 @@ export default new Vuex.Store({
         })
     },
     SearchSurahbyNumber(context, id) {
-      console.log(id.surah, '<<<<<<<<<')
+      // console.log(id.surah, '<<<<<<<<<')
       // const id = id.surah
       axios({
         url: `https://api-alquranid.herokuapp.com/surah/${id.surah}`,
@@ -197,7 +198,7 @@ export default new Vuex.Store({
     },
     addBookmark(context, payload) {
       axios({
-        url: 'http://localhost:3000/bookmark',
+        url: 'https://muslim-pro.herokuapp.com/bookmark',
         method: 'POST',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -222,25 +223,25 @@ export default new Vuex.Store({
     fetchBookmark(context, payload) {
       // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>ini didalam fetch bookmark')
       axios({
-        url: 'http://localhost:3000/bookmark',
+        url: 'https://muslim-pro.herokuapp.com/bookmark',
         method: 'GET',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
       })
         .then(({ data }) => {
-          console.log(data, '<<<<<<<< hasil bookmarked')
+          // console.log(data, '<<<<<<<< hasil bookmarked')
           context.commit('FETCH_BOOKMARKS', data.Bookmark)
         })
         .catch((err) => {
-          console.log('????????error fetch BOOKMARK')
+          // console.log('????????error fetch BOOKMARK')
           console.log(err.response)
         })
     },
     deleteBookmark(context, payload) {
       // console.log(payload, '<<<<<<<<<<<<<')
       axios({
-        url: 'http://localhost:3000/bookmark',
+        url: 'https://muslim-pro.herokuapp.com/bookmark',
         method: 'DELETE',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -260,12 +261,12 @@ export default new Vuex.Store({
     },
     googleLogin(context, googleUser) {
 
-      console.log('---------------PROSES LOGIN GOOGLE MUTATION----------')
+      // console.log('---------------PROSES LOGIN GOOGLE MUTATION----------')
       
       var idToken = googleUser.getAuthResponse().id_token
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/loginGoogle',
+        url: 'https://muslim-pro.herokuapp.com/loginGoogle',
         data: {
           token_google: idToken
         }
@@ -275,7 +276,7 @@ export default new Vuex.Store({
         router.push('/')
       })
       .catch((err) => {
-          console.log('---------------PROSES LOGIN GOOGLE GAGAL----------')
+          // console.log('---------------PROSES LOGIN GOOGLE GAGAL----------')
           console.log(err)
         })
     }

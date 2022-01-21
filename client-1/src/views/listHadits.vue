@@ -12,7 +12,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Name : [Muslim]"
+              placeholder="Name of imam ex. muslim"
               v-model="data.imam"
             />
           </div>
@@ -20,7 +20,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Surah : 1-114"
+              placeholder="Range of jumlah hadits ex. 1"
               v-model="data.number"
             />
           </div>

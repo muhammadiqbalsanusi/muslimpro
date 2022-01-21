@@ -81,6 +81,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name === 'Bookmark' && !localStorage.getItem('access_token')) next({ name: 'Login' })
+  else if (to.name === 'detailQuran' && !localStorage.getItem('access_token')) next({ name: 'Login' })
+  else if (to.name === 'detailQuran2' && !localStorage.getItem('access_token')) next({ name: 'Login' })
+  else if (to.name === 'detailHadits' && !localStorage.getItem('access_token')) next({ name: 'Login' })
+  else if (to.name === 'listQuran' && !localStorage.getItem('access_token')) next({ name: 'Login' })
+  else if (to.name === 'listHadits' && !localStorage.getItem('access_token')) next({ name: 'Login' })
   else if (to.name === 'Login' && localStorage.getItem('access_token')) next({ name: 'Home' })
   else if (to.name === 'Register' && localStorage.getItem('access_token')) next({ name: 'Home' })
   else next()
