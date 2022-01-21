@@ -2,18 +2,18 @@
   <div id="app">
     <Navbar/>
      <router-view/>
-    <!-- <HFooter /> -->
+    <HFooter />
   </div>
 </template>
 <script>
 import Navbar from './components/navbar.vue'
-// import HFooter from 'vue-hacktiv8-footer'
+import HFooter from 'vue-hacktiv8-footer'
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    // HFooter
+    HFooter
   },
   created () {
     if (localStorage.getItem('access_token')) {

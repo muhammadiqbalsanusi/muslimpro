@@ -64,12 +64,6 @@
     "errMessage" : "Invalid username or email or password!"
   }
 
-
-
-
-
-
-
 ## 3. ADD BOOKMARK
 
   ### `POST` /BOOKMARK/
@@ -249,7 +243,6 @@
     ]
 }
 
-
 **Response : 401 (NOT AUTHORIZED)**  <br/>
 
   {
@@ -304,9 +297,6 @@
   {
     "message": "missing access_token"
 }
-
-
-
 
 ## 8. GET ALL HADITS
 
@@ -384,6 +374,37 @@
 }
 
 ## 9. GET ONE HADITS
+
+  ### `GET` https://api-hadits.azharimm.site/books/ahmad/1
+
+ **Request Header: (WITH OR WITHOUR HEADERS)**
+  {
+    "access_token": "< access token >"
+  }
+ **Parameters:**
+ 
+ not needed
+
+ **Request Body:**
+  {
+      none
+  }
+
+**Response : 201 (OK)**  <br/>
+    "status": true,
+    "data": {
+        "hadith": {
+            "number": 1,
+            "arab": "حَدَّثَنَا عَبْدُ اللَّهِ بْنُ نُمَيْرٍ قَالَ أَخْبَرَنَا إِسْمَاعِيلُ يَعْنِي ابْنَ أَبِي خَالِدٍ عَنْ قَيْسٍ قَالَقَامَ أَبُو بَكْرٍ رَضِيَ اللَّهُ عَنْهُ فَحَمِدَ اللَّهَ وَأَثْنَى عَلَيْهِ ثُمَّ قَالَ يَا أَيُّهَا النَّاسُ إِنَّكُمْ تَقْرَءُونَ هَذِهِ الْآيَةَ{ يَا أَيُّهَا الَّذِينَ آمَنُوا عَلَيْكُمْ أَنْفُسَكُمْ لَا يَضُرُّكُمْ مَنْ ضَلَّ إِذَا اهْتَدَيْتُمْ }وَإِنَّا سَمِعْنَا رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَقُولُ إِنَّ النَّاسَ إِذَا رَأَوْا الْمُنْكَرَ فَلَمْ يُنْكِرُوهُ أَوْشَكَ أَنْ يَعُمَّهُمْ اللَّهُ بِعِقَابِهِ",
+            "id": "Telah menceritakan kepada kami [Abdullah Bin Numair] dia berkata; telah mengabarkan kepada kami [Isma'il] dari [Qais] dia berkata; [Abu Bakar] berdiri lalu memuji Allah dan mensucikan-Nya kemudian berkata; wahai manusia sesungguhnya kalian membaca ayat ini: \"Hai orang-orang yang beriman, jagalah dirimu; tiadalah orang yang sesat itu akan memberi mudharat kepadamu apabila kamu telah mendapat petunjuk.\" (QS Al Maidah ayat 105). Dan sesungguhnya kami mendengar Rasulullah shallallahu 'alaihi wasallam bersabda: \"sesungguhnya jika manusia melihat kemungkaran kemudian mereka tidak mengingkarinya, maka hampir saja Allah akan menimpakan siksa kepada mereka semua.\""
+        }
+    }
+    
+**Response : 401 (NOT AUTHORIZED)**  <br/>
+
+  {
+    "message": "missing access_token"
+}
 ## 10. GET JADWAL SHALAT
 
   ### `GET` https://api.myquran.com/v1/sholat/jadwal/${payload.kota}/${payload.year}/${payload.month}`
