@@ -10,7 +10,9 @@
   "dependencies": {
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
+    "sweetalert2": "^11.3.6",
     "vue": "^2.6.11",
+    "vue-google-login": "^2.0.5",
     "vue-hacktiv8-footer": "^0.0.9",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"

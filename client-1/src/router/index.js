@@ -4,7 +4,10 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import listQuran from '../views/listQuran.vue'
+import listHadits from '../views/listHadits.vue'
 import detailQuran from '../views/detailQuran.vue'
+import detailQuran2 from '../views/detailQuran2.vue'
+import detailHadits from '../views/detailHadits.vue'
 import Bookmark from '../views/Bookmark.vue'
 
 Vue.use(VueRouter)
@@ -31,9 +34,24 @@ const routes = [
     component: listQuran
   },
   {
+    path: '/listhadits',
+    name: 'listHadits',
+    component: listHadits
+  },
+  {
     path: '/detailquran/:id',
     name: 'detailQuran',
     component: detailQuran
+  },
+  {
+    path: '/detailquran2',
+    name: 'detailQuran2',
+    component: detailQuran2
+  },
+  {
+    path: '/detailhadits',
+    name: 'detailHadits',
+    component: detailHadits
   },
   {
     path: '/bookmark',

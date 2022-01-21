@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <img alt="Vue logo" src="../assets/slider-2.png" />
-      <div>
+    <div>
       <router-link to="/listquran">
       <button class="btn btn-primary mr-4">Back</button>
       </router-link>
@@ -33,13 +33,14 @@
 <script>
 import CardAyat from "../components/cardAyat.vue";
 export default {
-  name: "Detail",
+  name: "Detail2",
   components: {
     CardAyat,
   },
   created() {
-    const id = this.$route.params.id;
-    this.$store.dispatch("getOneSurah", id);
+
+    // const id = this.$route.params.id;
+    // this.$store.dispatch("getOneSurah", id);
   },
   computed: {
     oneSurahData() {

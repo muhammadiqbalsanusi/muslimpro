@@ -1,8 +1,17 @@
 <template>
-  <div>
+  <div class="container mt-5">
     <img alt="Vue logo" src="../assets/slider-2.png" />
 
     <!-- <h2 class="mt-4">BOOKMARK</h2> -->
+    <div>
+      <router-link to="/listquran">
+      <button class="btn btn-primary mr-4">Back</button>
+      </router-link>
+      <router-link to="/">
+      <button class="btn btn-info mr-4">Home</button>
+      </router-link>
+      </div>
+      
     <div class="row mr-3 ml-3 mb-3 mt-3 mr-3">
       <!-- <CardBookmark/> -->
       <CardBookmark
@@ -11,7 +20,6 @@
         :bookmarkData="bookmark"
       ></CardBookmark>
     </div>
-    <Footer />
   </div>
 </template>
 

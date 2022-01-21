@@ -7,26 +7,26 @@
     />
     <div class="card-body">
       <h4 class="card-title">
-        {{ surahAllData ? surahAllData.nama : "AlFatihah" }}
+        {{ haditsData ? haditsData.number : "nomor hadits" }}
       </h4>
       <p class="h6">
-        <em> ({{ surahAllData ? surahAllData.arti : "AlFatihah" }}) </em>
+        <em> ({{ haditsData ? haditsData.arab : "AlFatihah" }}) </em>
       </p>
       <span class="badge bg-success mr-3">
-        Nomor : {{ surahAllData ? surahAllData.nomor : "Makkiyah" }}</span
+        Nomor : {{ haditsData ? haditsData.id : "Makkiyah" }}</span
       >
-      <p class="card-text">
-        {{ surahAllData ? surahAllData.ayat : "7 Ayat" }} Ayat
-      </p>
+      <!-- <p class="card-text">
+        {{ haditsData ? haditsData.ayat : "7 Ayat" }} Ayat
+      </p> -->
 
       <!-- AUDIO -->
 
       <!-- AUDIO -->
 
-      <router-link :to="`/detailquran/${surahAllData.nomor}`">
+      <!-- <router-link :to="`/detailquran/${haditsData.nomor}`">
         <button class="btn btn-primary mr-2">Baca</button>
       </router-link>
-      <button class="btn btn-info" @click="addBookmark(surahAllData)">
+      <button class="btn btn-info" @click="addBookmark(haditsData)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -43,13 +43,13 @@
           />
         </svg>
         Bookmark
-      </button>
+      </button> -->
     </div>
 
-    <audio controls>
-      <source :src="surahAllData.audio" type="audio/ogg" />
-      <source :src="surahAllData.audio" type="audio/mpeg" />
-    </audio>
+    <!-- <audio controls>
+      <source :src="haditsData.audio" type="audio/ogg" />
+      <source :src="haditsData.audio" type="audio/mpeg" />
+    </audio> -->
   </div>
 </template>
 
@@ -63,7 +63,7 @@ export default {
       SurahId: "",
     };
   },
-  props: ["surahAllData"],
+  props: ["haditsData"],
   // computed: {
   //   checkLogin () {
   //     return this.$store.state.checkLogin

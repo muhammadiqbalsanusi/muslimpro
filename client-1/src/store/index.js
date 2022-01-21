@@ -2,12 +2,16 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
+import Swal from 'sweetalert2'
+
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     allSurahData: [],
+    allHaditsData: [],
+    oneHaditsData: [],
     oneSurahData: [],
     jadwalShalatData: [],
     BookmarkData: [],
@@ -23,6 +27,12 @@ export default new Vuex.Store({
     },
     ALL_SURAH(state, payload) {
       state.allSurahData = payload
+    },
+    ALL_HADITS(state, payload) {
+      state.allHaditsData = payload
+    },
+    ONE_HADITS(state, payload) {
+      state.oneHaditsData = payload
     },
     ONE_SURAH(state, payload) {
       state.oneSurahData = payload
@@ -101,20 +111,79 @@ export default new Vuex.Store({
           // })
         })
     },
+    getAllHadits(context, payload) {
+      axios({
+        url: 'https://api-hadits.azharimm.site/books',
+        method: 'GET',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          context.commit('ALL_HADITS', data.data)
+          // router.push('/listquran')
+
+        })
+        .catch((err) => {
+          console.log(err.response)
+          // Swal.fire({
+          //   icon: 'error',
+          //   title: 'Try Onother search ',
+          //   text: err.response.data.err
+          // })
+        })
+    },
+    SearchHadits(context, payload) {
+      axios({
+        url: `https://api-hadits.azharimm.site/books/${payload.imam}/${payload.number}`,
+        method: 'GET',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          console.log(data.data.hadith, '<<<<<<<<<<<<')
+          context.commit('ONE_HADITS', data.data.hadith)
+          router.push('/detailhadits')
+        })
+        .catch((err) => {
+          console.log(err.response)
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: err.response.status
+          })
+        })
+    },
     getOneSurah(context, id) {
-      // console.log(id,'<<<<<<<<<<<<<<<<<<<<<<<')
       axios({
         url: `https://api-alquranid.herokuapp.com/surah/${id}`,
         method: 'GET'
       })
         .then(({ data }) => {
-          console.log(data, '<<<<<<<<<<<<<<<<<<<')
           context.commit('ONE_SURAH', data.data)
+        })
+        .catch((err) => {
+          console.log(err,'<<<<<<<<<<<<<<<<<,')
+        })
+    },
+    SearchSurahbyNumber(context, id) {
+      console.log(id.surah, '<<<<<<<<<')
+      // const id = id.surah
+      axios({
+        url: `https://api-alquranid.herokuapp.com/surah/${id.surah}`,
+        method: 'GET'
+      })
+        .then(({ data }) => {
+          // console.log(data, '<<<<<<<<<<<<<<<<<<<')
+          context.commit('ONE_SURAH', data.data)
+          router.push('/detailquran2')
+
         })
         .catch((err) => console.log(err))
     },
     getJadwalShalat(context, payload) {
-      
+
       axios({
         url: `https://api.myquran.com/v1/sholat/jadwal/${payload.kota}/${payload.year}/${payload.month}`,
         // url: `https://api.myquran.com/v1/sholat/jadwal/${payload.kota}/2022/01`,
@@ -177,7 +246,7 @@ export default new Vuex.Store({
           access_token: localStorage.getItem('access_token')
         },
         data: {
-          SurahId : payload
+          SurahId: payload
         }
       })
         .then(({ data }) => {
@@ -189,6 +258,26 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    googleLogin(context, googleUser) {
 
+      console.log('---------------PROSES LOGIN GOOGLE MUTATION----------')
+      
+      var idToken = googleUser.getAuthResponse().id_token
+      axios({
+        method: 'POST',
+        url: 'http://localhost:3000/loginGoogle',
+        data: {
+          token_google: idToken
+        }
+      })
+      .then(({ data }) => {
+        localStorage.setItem('access_token', data.access_token)
+        router.push('/')
+      })
+      .catch((err) => {
+          console.log('---------------PROSES LOGIN GOOGLE GAGAL----------')
+          console.log(err)
+        })
+    }
   }
 })

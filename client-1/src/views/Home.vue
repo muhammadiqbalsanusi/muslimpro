@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="home"> -->
-  <div class="container">
+  <div class="container mt-5">
     <img src="../assets/slider-1.png" class="d-block w-100" alt="..." />
 
     <!-- TABLE JADWAL SHALAT -->
@@ -55,16 +55,6 @@
         </thead>
         <tbody>
           <TableShalat v-for="(el, index) in jadwalShalat" :key="index" :dataShalat="el" />
-          
-          <!-- <CardData  v-for="(surah, index) in surahAllData" :key="index" :surahAllData="surah"/> -->
-          <!-- <tr>
-            <td>SENIN, 1 JANUARI 2022</td>
-            <td>04:00</td>
-            <td>04:00</td>
-            <td>04:00</td>
-            <td>04:00</td>
-            <td>04:00</td>
-          </tr> -->
         </tbody>
       </table>
     </div>

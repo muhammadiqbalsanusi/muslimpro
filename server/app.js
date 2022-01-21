@@ -29,6 +29,7 @@ app.post('/users/register', (req, res, next) => {
         .then((user) => {
             res.status(201).json({
                 success: true,
+                message : "Register user Succesfull",
                 id: user.id,
                 email: user.email
             })
@@ -74,6 +75,7 @@ app.post('/users/login', (req, res, next) => {
                 const access_token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
                 res.status(200).json({
                     success: true,
+                    message: "Login User Success",
                     access_token
                 })
             } else {
@@ -89,7 +91,84 @@ app.post('/users/login', (req, res, next) => {
         })
 })
 
-app.use(authentication)
+app.post('/loginGoogle', (req, res, next) => {
+    console.log('>>>>>>>>>>> Proses di dadalam create login user');
+    const client = new OAuth2Client(process.env.CLIENT_ID);
+    const { token_google } = req.body;
+    let email = "";
+    let payload
+
+    client
+    .verifyIdToken({
+        idToken: token_google,
+        audience: process.env.CLIENT_ID
+    })
+    .then((ticket) => {
+        console.log(ticket, '<<<<<<<<<<<<<<<<<< ini ticker line 107 login google ')
+        payload = ticket.getPayload();
+        // console.log("Payload Google: ", payload)
+        
+        return User.findOne({
+            where: { email: payload.email },
+        })
+    })
+    .then((user) => {
+        console.log('<<<<<<<<<<<<<<<<<<berhasil menemukan user dan lanjut created akun user')
+        if (!user) {
+            return User.create({
+                email: payload.email,
+                    password: Math.random() * 1000 + "koderahasia",
+                    // role: 'customer',
+                    // phoneNumber: payload.exp,
+                    // address: payload.jti
+                    // email,
+                    // password: Math.random() * 1000 + "koderahasia"
+                })
+            }
+            else {
+                return user;
+            }
+        })
+        .then((user) => {
+            if (user) {
+                console.log('<<<<<<<<<<<<<< proses membuat access_token')
+                const access_token = jwt.sign(
+                    {
+                        id: user.id,
+                        email: user.email
+                    },
+                    process.env.JWT_SECRET
+                );
+
+                return res.status(200).json({
+                    message: "Success login", 
+                    access_token,
+                    role: user.role
+
+                })
+
+            } else {
+                throw { name: "FAILED_LOGIN" }
+            };
+            // if (user) {
+            //     const access_token = jwt.sign(
+            //         { id: user.id, username: user.username, role: user.role, phoneNumber: user.phoneNumber, address: user.address }, process.env.JWT_SECRET)
+            //     res.status(200).json({
+            //         success: true,
+            //         msg: "Berhasil Signin or signup",
+            //         access_token,
+            //     })
+            // } else {
+
+            // }
+        })
+        .catch((err) => {
+            // console.log(err);
+            res.status(500).json({ error: err })
+        })
+})
+
+app.use(authentication) //? inin authentication di bagian bawahnya
 
 app.post('/bookmark', (req, res, next) => {
     console.log("<<<<prosess add Bookmark>>>>");
@@ -102,8 +181,6 @@ app.post('/bookmark', (req, res, next) => {
         ayat: req.body.ayat
     }
     console.log(input, "<<<<<<<<<<>>>>>>");
-    // console.log(input.UserId, '<<<<<<<<<<id req.user')
-    // console.log(input.SurahId, '<<<<<<<<<<<<<<<< id req.body.surah')
 
     Bookmark.create(input)
         .then((data) => {
@@ -129,15 +206,12 @@ app.post('/bookmark', (req, res, next) => {
 })
 
 app.get('/bookmark', (req, res, next) => {
-    console.log(req.userId, '<<<<<<<<<<di dalam bookmark cont')
-    console.log(req.userId, '<<<<<<<<<<is req.user')
     const opt = {
         where: { UserId: req.userId }
     }
 
     Bookmark.findAll(opt)
         .then((data) => {
-            console.log('<<<<<<<<berhasil mendapatkan bookmarked')
             if (data) {
                 res.status(201).json({
                     Bookmark: data,
@@ -162,73 +236,75 @@ app.delete('/bookmark', (req, res, next) => {
     const user = req.userId
     console.log(surah, '<<<< Nomor Surah')
     console.log(user, '<<<< id user')
-    Bookmark.destroy({ where: { 
-        SurahId : surah,
-        UserId : user 
-    } })
-    .then((_)=> {
-        res.status(200).json({
-            message: 'Bookmark succesfull delete'
-        })
+    Bookmark.destroy({
+        where: {
+            SurahId: surah,
+            UserId: user
+        }
     })
-    .catch((err) => {
-        console.log('???????????????? gagal delete line 167:delete bookmarked')
-        console.log(err)
-        res.status(500).json(err)
-    })
+        .then((_) => {
+            res.status(200).json({
+                message: 'Bookmark succesfull delete'
+            })
+        })
+        .catch((err) => {
+            console.log('???????????????? gagal delete line 167:delete bookmarked')
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
-// ! ***********BATAS AWAL SETTING************
-app.get('/getdata', (req, res, next) => {
-    console.log(req.userId, "<<<<<<<<<< cek user id nya bro")
+// // ! ***********BATAS AWAL SETTING************
+// app.get('/getdata', (req, res, next) => {
+//     console.log(req.userId, "<<<<<<<<<< cek user id nya bro")
 
-    const opt = {
-        attributes: {
-            exclude: ['createdAt', 'updatedAt']
-        },
-        offset: 1,
-        limit: 3
-    }
-    Surah.findAll(opt)
-        .then((data) => {
-            res.status(200).json({
-                success: true,
-                data
-            })
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json(error)
-        })
-})
-app.get('/https://api-alquranid.herokuapp.com/surah', (req, res, next) => {
-    Surah.findAll()
-        .then((data) => {
-            res.status(200).json({
-                success: true,
-                data
-            })
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json(error)
-        })
-})
+//     const opt = {
+//         attributes: {
+//             exclude: ['createdAt', 'updatedAt']
+//         },
+//         offset: 1,
+//         limit: 3
+//     }
+//     Surah.findAll(opt)
+//         .then((data) => {
+//             res.status(200).json({
+//                 success: true,
+//                 data
+//             })
+//         })
+//         .catch((error) => {
+//             console.log(error)
+//             res.status(500).json(error)
+//         })
+// })
+// app.get('/https://api-alquranid.herokuapp.com/surah', (req, res, next) => {
+//     Surah.findAll()
+//         .then((data) => {
+//             res.status(200).json({
+//                 success: true,
+//                 data
+//             })
+//         })
+//         .catch((error) => {
+//             console.log(error)
+//             res.status(500).json(error)
+//         })
+// })
 
-app.get('/https://api-alquranid.herokuapp.com/surah/1', (req, res, next) => {
-    const id = req.params.id
-    Surah.findByPk(id)
-        .then((data) => {
-            res.status(200).json({
-                success: true,
-                data
-            })
-        })
-        .catch((error) => {
-            console.log(error)
-            res.status(500).json(error)
-        })
-})
-// ! ***********BATAS TERAKHIR SETTING************
+// app.get('/https://api-alquranid.herokuapp.com/surah/1', (req, res, next) => {
+//     const id = req.params.id
+//     Surah.findByPk(id)
+//         .then((data) => {
+//             res.status(200).json({
+//                 success: true,
+//                 data
+//             })
+//         })
+//         .catch((error) => {
+//             console.log(error)
+//             res.status(500).json(error)
+//         })
+// })
+// // ! ***********BATAS TERAKHIR SETTING************
 
 app.listen(port, () => {
     console.log(`listening at htpp://localhost:${port}`)

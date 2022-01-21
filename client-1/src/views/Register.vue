@@ -9,20 +9,6 @@
             <div class="col-md-6 mt-5">
               <h3 class="signin-text mb-3"> REGISTER</h3>
               <form @submit.prevent="handleRegister">
-                <!-- <div class="form-group row">
-                  <label for="registerUsername" class="col-sm-3 col-form-label"
-                    >Username</label
-                  >
-                  <div class="col-sm-9">
-                    <input
-                      v-model="userRegister.username"
-                      id="register-username"
-                      type="text"
-                      class="form-control"
-                      required
-                    />
-                  </div>
-                </div> -->
                 <div class="form-group row">
                   <label for="registerEmail" class="col-sm-3 col-form-label"
                     >Email</label
@@ -53,55 +39,14 @@
                     />
                   </div>
                 </div>
-                <!-- <div class="form-group row">
-                  <label for="registerRole" class="col-sm-3 col-form-label"
-                    >Role</label
-                  >
-                  <div class="col-sm-9">
-                    <input
-                      v-model="userRegister.role"
-                      id=" register-role"
-                      type="text"
-                      class="form-control"
-                      value="customer"
-                      placeholder="customer"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="registerPhoneNumber" class="col-sm-3 col-form-label"
-                    >Phone</label
-                  >
-                  <div class="col-sm-9">
-                    <input
-                      v-model="userRegister.phoneNumber"
-                      id="register-phoneNumber"
-                      type="number"
-                      class="form-control"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="registeraddres" class="col-sm-3 col-form-label"
-                    >Address</label
-                  >
-                  <div class="col-sm-9">
-                    <input
-                      v-model="userRegister.address"
-                      id="register-address"
-                      type="text"
-                      class="form-control"
-                      required
-                    />
-                  </div>
-                </div> -->
                 <div class="form-group row">
                   <div class="col-sm-5 ml-auto">
                     <button type="click" class="btn btn-outline-success mr-4">Submit</button>
                   </div>
                 </div>
               </form>
+
+
             </div>
     <!-- BATAS AKHIR PEMBUNGKUS -->
   </div>
@@ -127,12 +72,12 @@ export default {
   methods: {
     handleRegister () {
       this.$store.dispatch('handleRegister', {
-        username: this.userRegister.username,
+        // username: this.userRegister.username,
         email: this.userRegister.email,
         password: this.userRegister.password,
-        role: this.userRegister.role,
-        phoneNumber: this.userRegister.phoneNumber,
-        address: this.userRegister.address
+        // role: this.userRegister.role,
+        // phoneNumber: this.userRegister.phoneNumber,
+        // address: this.userRegister.address
       })
     }
   }
